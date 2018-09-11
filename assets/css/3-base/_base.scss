@@ -1,4 +1,205 @@
 /* Base Styles -------------------- */
 main.content-wrap{
-  margin-top: 2rem;
+  margin-top: 5.5rem;
+  margin-bottom: 5rem;
+}
+
+//VAR COLORS
+$omg-primary : #004685;
+$omd-primary : #EE3425;
+$phd-primary : #3D1A52;
+$fuse-primary : #BE0620;
+
+//TEXT
+/*.text-omg{
+  font-family: 'Montserrat', sans-serif;
+  color: #004685;
+}
+.text-omd{
+  font-family: 'Montserrat', sans-serif;
+  color: #EE3425;
+}
+.text-phd{
+  font-family: 'Montserrat', sans-serif;
+  color: #3D1A52;
+}
+.text-fuse{
+  font-family: 'Montserrat', sans-serif;
+  color: #BE0620;
+}*/
+
+//COMMON
+.table-row{
+  cursor:pointer;
+}
+//JUMBROTRON
+.jumbotron{
+  margin-top: -2rem;
+  padding-bottom: 1rem;
+  h1{
+    font-size: 4rem;
+    font-weight: 300;
+  }
+  h2{
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  h3{
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  .logo{
+    text-align: left;
+    width: auto;
+    display: block;
+    position: relative;
+    img{
+      height: 6rem;
+    }
+    svg{
+      max-width: 25rem;
+      height: 6rem;
+      display: block;
+    }
+  }
+  .btn.btn-primary{
+    //position: absolute;
+    //right:1rem;
+    //bottom:1rem;
+  }
+  .jumbotron-date{
+    //position: absolute;
+    margin: 0;
+    //left: 1rem;
+    //bottom: 1rem;
+    font-size: 1.33rem;
+    font-weight: 400;
+    i{
+      font-size: 1.33rem;
+    }
+  }
+}
+.fa-stack{
+  .fa-stack-1x{
+    font-size: .6rem;
+    margin-left: .5rem;
+    margin-top: .4rem;
+    color: $secondary;
+  }
+  .fa-stack-2x{
+    font-size: 1.5rem;
+  }
+}
+.preview-link{
+  &:hover,
+  &:focus{
+    text-decoration: none;
+  }
+}
+
+.display-4{
+  font-size: 2rem;
+}
+//NAVBAR
+.navbar-brand > div.svg-brand{
+  display: inline-block;
+  svg{
+    height:30px;
+    .st0,
+    .st1,
+    .st2,
+    .st3,
+    path{
+      fill:rgba(255,255,255,.8); //SET LOGOS WHITE IN NAVBAR
+    }
+  }
+}
+.card{
+  a{
+    text-decoration: none;
+  }
+  img.card-img-top{
+    background-color: $light;
+    height:10rem;
+    padding: 1rem;
+    margin: auto;
+    display: block;
+  }
+}
+//FOOTER
+footer{
+  .project-copy,
+  .project-version{
+    font-size:.75rem;
+    @extend .mt-2;
+    @extend .mb-2;
+  }
+}
+//THEMES
+//OMG
+body.omg{
+  .bg-primary,
+  .badge-primary{
+    background-color: $omg-primary!important;
+  }
+  .btn-primary{
+    background-color: $omg-primary!important;
+    border-color: $omg-primary!important;
+  }
+  .text-primary{
+    color:$omg-primary!important;
+  }
+  .navbar-brand div.svg-brand{
+    svg{
+      .st0,
+      .st1,
+      .st2,
+      .st3,
+      path{
+        fill:rgba(255,255,255,.8); //SET LOGOS WHITE IN NAVBAR
+      }
+    }
+  }
+}
+//OMD
+body.omd{
+  .bg-primary,
+  .badge-primary{
+    background-color: $omd-primary!important;
+  }
+  .btn-primary{
+    background-color: $omd-primary!important;
+    border-color: $omd-primary!important;
+  }
+  .text-primary{
+    color:$omd-primary!important;
+  }
+}
+//PHD
+body.phd{
+  .bg-primary,
+  .badge-primary{
+    background-color: $phd-primary!important;
+  }
+  .btn-primary{
+    background-color: $phd-primary!important;
+    border-color: $phd-primary!important;
+  }
+  .text-primary{
+    color:$phd-primary!important;
+  }
+}
+//FUSE
+body.fuse{
+  .bg-primary,
+  .badge-primary{
+    background-color: $fuse-primary!important;
+  }
+  .btn-primary{
+    background-color: $fuse-primary!important;
+    border-color: $fuse-primary!important;
+  }
+  .text-primary{
+    color:$fuse-primary!important;
+  }
 }

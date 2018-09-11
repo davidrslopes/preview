@@ -15,11 +15,10 @@ Allow from ::1
 AddHandler cgi-script .bat .exe .pl .cgi
 Options +ExecCGI +FollowSymLinks
 
-
-Options +FollowSymLinks
 RewriteEngine On
+RewriteBase /
 
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
-RewriteRule ^.*$ ./index.php
+RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]

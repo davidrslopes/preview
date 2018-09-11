@@ -1,6 +1,10 @@
 <?php
-//GET URL
-$url = trim( $_SERVER['REQUEST_URI'], '/');
+
+//PROJECT VARS
+include('parts/vars.php');
+
+//FUNCTIONS
+include('parts/functions.php');
 
 //HEADER
 include('parts/header.php');
@@ -8,14 +12,8 @@ include('parts/header.php');
 //NAV
 include('parts/nav.php');
 
-//PAGES ROUTER
-if(!empty($url)){
-  //ROUTER
-  include('pages/'.$url.'.php');
-}else{
-  //HOME
-  include('pages/home.php');
-}
+//TEMPLATE ROUTER
+include('parts/router.php');
 
 //FOOTER
 include('parts/footer.php');
