@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Ferramenta de preview de campanhas <?php echo (empty($campaign['company'])) ? 'Ominicom Media Group' : strtoupper ($campaign['company']); ?>">
     <meta name="keywords" content="HTML, CSS, JS, Sass, JavaScript, framework, bootstrap, front-end, frontend, web development">
-    <meta name="author" content="David Lopes">
+    <meta name="author" content="David Lopes @ Omnicom Media Group">
     <title><?php echo (empty($campaign['company'])) ? 'Ominicom Media Group' : strtoupper ($campaign['company']); ?> - Campaign Preview</title>
     <!-- Favicon and System icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/<?php echo (empty($campaign['company'])) ? 'OMG' : strtoupper ($campaign['company']); ?>-apple-touch-icon.png">
