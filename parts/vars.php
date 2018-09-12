@@ -31,3 +31,7 @@ if($url){
     //$campaign[target_url] = "http://www.renault.pt/zoe"; //Dinamicly?
   }
 }
+
+//VERSION
+$version[number] = "α";
+$version[desc] = 'Versão Alpha | Apenas para preview interno.';
