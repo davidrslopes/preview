@@ -9289,60 +9289,16 @@ html {
     -ms-flex-item-align: stretch !important;
         align-self: stretch !important; } }
 
+/* Colors -------------------- */
 /* Custom Mixins -------------------- */
 /* Base Styles -------------------- */
 main.content-wrap {
   margin-top: 5.5rem;
   margin-bottom: 5rem; }
 
-/*.text-omg{
-  font-family: 'Montserrat', sans-serif;
-  color: #004685;
-}
-.text-omd{
-  font-family: 'Montserrat', sans-serif;
-  color: #EE3425;
-}
-.text-phd{
-  font-family: 'Montserrat', sans-serif;
-  color: #3D1A52;
-}
-.text-fuse{
-  font-family: 'Montserrat', sans-serif;
-  color: #BE0620;
-}*/
-.table-row {
-  cursor: pointer; }
-
-.jumbotron {
-  margin-top: -2rem;
-  padding-bottom: 1rem; }
-  .jumbotron h1 {
-    font-size: 4rem;
-    font-weight: 300; }
-  .jumbotron h2 {
-    font-size: 2rem;
-    font-weight: 400; }
-  .jumbotron h3 {
-    font-size: 1.5rem;
-    font-weight: 300; }
-  .jumbotron .logo {
-    text-align: left;
-    width: auto;
-    display: block;
-    position: relative; }
-    .jumbotron .logo img {
-      height: 6rem; }
-    .jumbotron .logo svg {
-      max-width: 25rem;
-      height: 6rem;
-      display: block; }
-  .jumbotron .jumbotron-date {
-    margin: 0;
-    font-size: 1.33rem;
-    font-weight: 400; }
-    .jumbotron .jumbotron-date i {
-      font-size: 1.33rem; }
+/* Common -------------------- */
+.display-4 {
+  font-size: 2rem; }
 
 .fa-stack .fa-stack-1x {
   font-size: .6rem;
@@ -9356,20 +9312,6 @@ main.content-wrap {
 .preview-link:hover, .preview-link:focus {
   text-decoration: none; }
 
-.display-4 {
-  font-size: 2rem; }
-
-.navbar-brand > div.svg-brand {
-  display: inline-block; }
-  .navbar-brand > div.svg-brand svg {
-    height: 30px; }
-    .navbar-brand > div.svg-brand svg .st0,
-    .navbar-brand > div.svg-brand svg .st1,
-    .navbar-brand > div.svg-brand svg .st2,
-    .navbar-brand > div.svg-brand svg .st3,
-    .navbar-brand > div.svg-brand svg path {
-      fill: rgba(255, 255, 255, 0.8); }
-
 .card a {
   text-decoration: none; }
 
@@ -9380,10 +9322,58 @@ main.content-wrap {
   margin: auto;
   display: block; }
 
+.table-row {
+  cursor: pointer; }
+
+/* Navbar -------------------- */
+.omnicp-navbar .navbar-brand > div.svg-brand {
+  display: inline-block; }
+  .omnicp-navbar .navbar-brand > div.svg-brand svg {
+    height: 30px; }
+    .omnicp-navbar .navbar-brand > div.svg-brand svg .st0,
+    .omnicp-navbar .navbar-brand > div.svg-brand svg .st1,
+    .omnicp-navbar .navbar-brand > div.svg-brand svg .st2,
+    .omnicp-navbar .navbar-brand > div.svg-brand svg .st3,
+    .omnicp-navbar .navbar-brand > div.svg-brand svg path {
+      fill: rgba(255, 255, 255, 0.8); }
+
+/* Jumbotron -------------------- */
+.omnicp-jumbotron {
+  margin-top: -2rem;
+  padding-bottom: 1rem; }
+  .omnicp-jumbotron h1 {
+    font-size: 4rem;
+    font-weight: 300; }
+  .omnicp-jumbotron h2 {
+    font-size: 2rem;
+    font-weight: 400; }
+  .omnicp-jumbotron h3 {
+    font-size: 1.5rem;
+    font-weight: 300; }
+  .omnicp-jumbotron .logo {
+    text-align: left;
+    width: auto;
+    display: block;
+    position: relative; }
+    .omnicp-jumbotron .logo img {
+      height: 6rem; }
+    .omnicp-jumbotron .logo svg {
+      max-width: 25rem;
+      height: 6rem;
+      display: block; }
+  .omnicp-jumbotron .jumbotron-date {
+    margin: 0;
+    font-size: 1.33rem;
+    font-weight: 400; }
+    .omnicp-jumbotron .jumbotron-date i {
+      font-size: 1.33rem; }
+
+/* Footer -------------------- */
 footer .project-copy,
 footer .project-version {
   font-size: .75rem; }
 
+/* Theme Specific Styling -------------------- */
 body.omg .bg-primary,
 body.omg .badge-primary {
   background-color: #004685 !important; }

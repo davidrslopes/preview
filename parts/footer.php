@@ -11,9 +11,8 @@
         </div>
       </div>
     </footer>
-    <!-- build:js -->
+    <!-- Scripts Build -->
     <script src="/assets/js/main.js"></script>
-    <!-- endbuild -->
-    <script src="https://unpkg.com/ionicons@4.4.2/dist/ionicons.js"></script>
+    <!-- //Scripts Build -->
   </body>
 </html>

@@ -1,5 +1,6 @@
 <?php $campaign_folders = getCampaignsNav($campaign); ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top navbar-<?php echo strtolower ($campaign['company']);?>">
+<!-- NAVIGATION ######################################## -->
+<nav class="omnicp-navbar navbar navbar-expand-lg navbar-dark bg-primary fixed-top navbar-<?php echo strtolower ($campaign['company']);?>">
   <div class="container">
     <a class="navbar-brand" href="/<?php echo $campaign['company']; ?>">
       <div class="svg-brand">
@@ -50,3 +51,4 @@
     </div>
   </div>
 </nav>
+<!-- //NAVIGATION ######################################## -->

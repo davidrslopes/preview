@@ -6,8 +6,8 @@ $folder_name = $dir_parts[4].' - '.$dir_parts[5];
 
 if (!empty($imgs) && count($imgs)):
 ?>
-
-<section class="preview">
+<!-- FOLDER PREVIEW: IMAGES ######################################## -->
+<section class="omnicp-folder-preview">
   <div class="container">
     <div class="row">
       <div class="col pb-4 text-left">
@@ -37,6 +37,7 @@ if (!empty($imgs) && count($imgs)):
     </div>
   </div>
 </section>
+<!-- //FOLDER PREVIEW: IMAGES ######################################## -->
 <?php endif; ?>
 
 <?php
@@ -44,8 +45,8 @@ $dir = $_GET[preview].'/*';
 $zips = glob($dir."*.{zip,rar}", GLOB_BRACE);
 if (!empty($zips) && count($zips)):
 ?>
-
-<section class="preview">
+<!-- FOLDER PREVIEW: ARQUIVES ######################################## -->
+<section class="omnicp-folder-preview">
   <div class="container">
     <div class="row">
       <div class="col pb-4 text-left">
@@ -58,20 +59,21 @@ if (!empty($zips) && count($zips)):
       </div>
     </div>
     <div class="row">
-    <div class="col">
-    <div class="list-group">
-    <?php
-      foreach($zips as $zip):
-        $item[name] = basename($zip);
-        $item[src] = $zip;
-        ?>
-        <a class="list-group-item list-group-item-action align-items-center d-flex justify-content-between" href="/<?php echo $item[src]; ?>" target=_blank">
-          <?php echo $item[name]; ?> <i class="fas fa-download"></i>
-        </a>
-    <?php endforeach;?>
-    </div>
-    </div>
+      <div class="col">
+        <div class="list-group">
+        <?php
+          foreach($zips as $zip):
+            $item[name] = basename($zip);
+            $item[src] = $zip;
+            ?>
+          <a class="list-group-item list-group-item-action align-items-center d-flex justify-content-between" href="/<?php echo $item[src]; ?>" target=_blank">
+            <?php echo $item[name]; ?> <i class="fas fa-download"></i>
+          </a>
+        <?php endforeach; ?>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 <?php endif; ?>
+<!-- //FOLDER PREVIEW: ARQUIVES ######################################## -->

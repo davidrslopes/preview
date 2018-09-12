@@ -1,12 +1,9 @@
 <?php
-//debug($campaign);
-
 include('jumbotron.php');
-
 $campaign_folders = getCampaign();
-//debug($campaign_folders);
 ?>
-<section class="campaign-content">
+<!-- CAMPAIGN CONTENT ######################################## -->
+<section class="omnicp-campaign-content">
   <div class="container">
     <div class="row">
       <?php foreach ($campaign_folders as $campaign_folder): ?>
@@ -72,3 +69,4 @@ $campaign_folders = getCampaign();
      </div>
    </div>
 </section>
+<!-- //CAMPAIGN CONTENT ######################################## -->

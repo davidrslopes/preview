@@ -1,6 +1,7 @@
 <?php
+//GET PATH VAR
 $path = $_GET[path];
-//debug($path);
+
 if($campaign){
   if($campaign[company]){
     //IF CAMPAIGN

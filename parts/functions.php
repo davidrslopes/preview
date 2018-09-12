@@ -1,6 +1,6 @@
 <?php
 
-
+//GET Folder contents
 function getFolderContents($dir){
   $folders = scandir($dir);
   unset($folders[array_search('.', $folders, true)]);
@@ -8,6 +8,7 @@ function getFolderContents($dir){
   return $folders = array_values($folders);
 }
 
+//GET Campaign data from slug
 function getCampaignDataFromSlug($campaign_slug){
   $campaign_slug_data = explode(' ',$campaign_slug);
   $campaign[date] = urldecode ( $campaign_slug_data[0] );
@@ -28,6 +29,7 @@ function getCampaigns($campaign){
   return array_reverse($folder);
 }
 
+//GET Campaigns from client
 function getCampaignsFromClient($campaign, $client){
   if(!$client){$client = $campaign[client];};
   $folder = 'CAMPANHAS/'.$campaign[company].'/'.$client;
@@ -40,6 +42,7 @@ function getCampaignsFromClient($campaign, $client){
   return array_reverse($folder);
 }
 
+//GET Campaigns for navbar
 function getCampaignsNav($campaign){
   $folder = 'CAMPANHAS/'.$campaign[company].'/'.$campaign[client];
   $folder = getFolderContents($folder);
@@ -57,7 +60,8 @@ function getClients($campaign){
   $folder = getFolderContents($folder);
   return $folder;
 }
-//LIST FOLDER FILES
+
+//LIST Folder files
 function listFolderFiles($dir){
     $ffs = scandir($dir);
 
@@ -76,6 +80,8 @@ function listFolderFiles($dir){
     }
     echo '</ol>';
 }
+
+//GET Type of extension
 function detectType($name){
   $ext= pathinfo($name, PATHINFO_EXTENSION);
   if(!$ext){
@@ -83,6 +89,7 @@ function detectType($name){
   }
   return $ext;
 }
+
 //GET Contents of current campaign
 function getCampaign(){
   global $campaign;
@@ -109,7 +116,8 @@ function getCampaign(){
 
   return $ffs;
 }
-//GET STATS
+
+//GET Stats
 /*function getCampaignStats($company){
   $campaignstats = 1;
   $campaigns = count( glob('CAMPANHAS/'.$company.'/*' , GLOB_ONLYDIR);
@@ -119,6 +127,7 @@ function getCampaign(){
   return $campaignstats;
 }*/
 
+//GET Companies
 function getCompanies($company){
   $folder = 'CAMPANHAS';
   $folder = getFolderContents($folder);
@@ -129,6 +138,7 @@ function getCompanies($company){
   }
   return $companies;
 }
+
 //DEBUG
 function debug($what){
   global $testmode;

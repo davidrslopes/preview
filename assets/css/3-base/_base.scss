@@ -4,36 +4,61 @@ main.content-wrap{
   margin-bottom: 5rem;
 }
 
-//VAR COLORS
-$omg-primary : #004685;
-$omd-primary : #EE3425;
-$phd-primary : #3D1A52;
-$fuse-primary : #BE0620;
-
-//TEXT
-/*.text-omg{
-  font-family: 'Montserrat', sans-serif;
-  color: #004685;
+/* Common -------------------- */
+.display-4{
+  font-size: 2rem;
 }
-.text-omd{
-  font-family: 'Montserrat', sans-serif;
-  color: #EE3425;
+.fa-stack{
+  .fa-stack-1x{
+    font-size: .6rem;
+    margin-left: .5rem;
+    margin-top: .4rem;
+    color: $secondary;
+  }
+  .fa-stack-2x{
+    font-size: 1.5rem;
+  }
 }
-.text-phd{
-  font-family: 'Montserrat', sans-serif;
-  color: #3D1A52;
+.preview-link{
+  &:hover,
+  &:focus{
+    text-decoration: none;
+  }
 }
-.text-fuse{
-  font-family: 'Montserrat', sans-serif;
-  color: #BE0620;
-}*/
-
-//COMMON
+.card{
+  a{
+    text-decoration: none;
+  }
+  img.card-img-top{
+    background-color: $light;
+    height:10rem;
+    padding: 1rem;
+    margin: auto;
+    display: block;
+  }
+}
 .table-row{
   cursor:pointer;
 }
-//JUMBROTRON
-.jumbotron{
+
+/* Navbar -------------------- */
+.omnicp-navbar{
+  .navbar-brand > div.svg-brand{
+    display: inline-block;
+    svg{
+      height:30px;
+      .st0,
+      .st1,
+      .st2,
+      .st3,
+      path{
+        fill:rgba(255,255,255,.8); //SET LOGOS WHITE IN NAVBAR
+      }
+    }
+  }
+}
+/* Jumbotron -------------------- */
+.omnicp-jumbotron{
   margin-top: -2rem;
   padding-bottom: 1rem;
   h1{
@@ -62,16 +87,8 @@ $fuse-primary : #BE0620;
       display: block;
     }
   }
-  .btn.btn-primary{
-    //position: absolute;
-    //right:1rem;
-    //bottom:1rem;
-  }
   .jumbotron-date{
-    //position: absolute;
     margin: 0;
-    //left: 1rem;
-    //bottom: 1rem;
     font-size: 1.33rem;
     font-weight: 400;
     i{
@@ -79,54 +96,8 @@ $fuse-primary : #BE0620;
     }
   }
 }
-.fa-stack{
-  .fa-stack-1x{
-    font-size: .6rem;
-    margin-left: .5rem;
-    margin-top: .4rem;
-    color: $secondary;
-  }
-  .fa-stack-2x{
-    font-size: 1.5rem;
-  }
-}
-.preview-link{
-  &:hover,
-  &:focus{
-    text-decoration: none;
-  }
-}
 
-.display-4{
-  font-size: 2rem;
-}
-//NAVBAR
-.navbar-brand > div.svg-brand{
-  display: inline-block;
-  svg{
-    height:30px;
-    .st0,
-    .st1,
-    .st2,
-    .st3,
-    path{
-      fill:rgba(255,255,255,.8); //SET LOGOS WHITE IN NAVBAR
-    }
-  }
-}
-.card{
-  a{
-    text-decoration: none;
-  }
-  img.card-img-top{
-    background-color: $light;
-    height:10rem;
-    padding: 1rem;
-    margin: auto;
-    display: block;
-  }
-}
-//FOOTER
+/* Footer -------------------- */
 footer{
   .project-copy,
   .project-version{
@@ -135,7 +106,9 @@ footer{
     @extend .mb-2;
   }
 }
-//THEMES
+
+/* Theme Specific Styling -------------------- */
+
 //OMG
 body.omg{
   .bg-primary,
@@ -161,6 +134,7 @@ body.omg{
     }
   }
 }
+
 //OMD
 body.omd{
   .bg-primary,
@@ -175,6 +149,7 @@ body.omd{
     color:$omd-primary!important;
   }
 }
+
 //PHD
 body.phd{
   .bg-primary,
@@ -189,6 +164,7 @@ body.phd{
     color:$phd-primary!important;
   }
 }
+
 //FUSE
 body.fuse{
   .bg-primary,
