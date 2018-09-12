@@ -9,15 +9,15 @@ $campaign_folders = getCampaigns($campaign);
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th>Data</th>
-            <th>Nome</th>
+            <?php if($campaign_folder[date]):?><th>Data</th><?php endif; ?>
+            <?php if($campaign_folder[name]):?><th>Nome</th><?php endif; ?>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($campaign_folders as $campaign_folder): ?>
             <tr class="table-row" data-href="<?php echo '/'.$campaign[company].'/'.$campaign[client].'/'.$campaign_folder[folder]; ?>">
-              <td><?php echo $campaign_folder[date]; ?></td>
-              <td><?php echo $campaign_folder[name]; ?></td>
+              <?php if($campaign_folder[date]):?><td><?php echo $campaign_folder[date]; ?></td><?php endif; ?>
+              <?php if($campaign_folder[name]):?><td><?php echo $campaign_folder[name]; ?></td><?php endif; ?>
             </tr>
           <?php endforeach; ?>
         </tbody>

@@ -6,10 +6,10 @@ if($campaign){
   if($campaign[company]){
     //IF CAMPAIGN
     if($campaign[client]){
-      if($campaign[name]){
+      if($campaign[name] || $campaign[date]){
         //IF FOLDER EXISTS : LOAD CAMPAIGN OR SHOW PREVIEW
         if(!empty($_GET[preview])){
-            include('templates/folder-preview.php');
+          include('templates/folder-preview.php');
         }else{
           include('templates/campaign.php');
         }
