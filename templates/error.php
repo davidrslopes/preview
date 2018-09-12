@@ -1,1 +1,9 @@
-This is an error.
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-1">404</h1>
+      <h3>O conteúdo que procura ainda não existe ou mudou de lugar.</h3>
+      <a href="/" class="btn btn-primary">VOLTAR AO INÍCIO</a>
+    </div>
+  </div>
+</div>
