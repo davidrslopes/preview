@@ -6425,8 +6425,8 @@ button.bg-dark:focus {
 .m-2 {
   margin: 0.5rem !important; }
 
-.mt-2, footer .project-copy,
-footer .project-version,
+.mt-2, footer .omnicp-copy,
+footer .omnicp-version,
 .my-2 {
   margin-top: 0.5rem !important; }
 
@@ -6434,8 +6434,8 @@ footer .project-version,
 .mx-2 {
   margin-right: 0.5rem !important; }
 
-.mb-2, footer .project-copy,
-footer .project-version,
+.mb-2, footer .omnicp-copy,
+footer .omnicp-version,
 .my-2 {
   margin-bottom: 0.5rem !important; }
 
@@ -9369,8 +9369,8 @@ main.content-wrap {
       font-size: 1.33rem; }
 
 /* Footer -------------------- */
-footer .project-copy,
-footer .project-version {
+footer .omnicp-copy,
+footer .omnicp-version {
   font-size: .75rem; }
 
 /* Theme Specific Styling -------------------- */

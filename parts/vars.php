@@ -32,6 +32,6 @@ if($url){
   }
 }
 
-//VERSION
+//VERSIONING
 $version[number] = "α";
-$version[desc] = 'Versão Alpha | Apenas para preview interno.';
+$version[desc] = 'Versão Alpha<br><small class=\'text-danger\'>Reservado apenas para preview interno</small>';
