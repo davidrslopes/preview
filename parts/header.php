@@ -34,5 +34,5 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <!-- //CSS Build -->
   </head>
-  <body class="<?php echo strtolower ($campaign['company']) ;?>">
-    <main class="content-wrap">
+  <body class="<?php echo strtolower ($campaign['company']) ;?> d-flex flex-column">
+    <main class="content-wrap flex-grow">

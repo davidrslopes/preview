@@ -1,10 +1,16 @@
 /* Base Styles -------------------- */
+body{
+  min-height: 100vh;
+}
 main.content-wrap{
   margin-top: 5.5rem;
   margin-bottom: 5rem;
 }
 
 /* Common -------------------- */
+.flex-grow {
+  flex: 1;
+}
 .display-4{
   font-size: 2rem;
 }
