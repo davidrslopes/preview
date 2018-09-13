@@ -1,12 +1,12 @@
 <?php
-//GET PATH VAR
-$path = $_GET[path];
+//PATH MUST BE THE SAME AS AN EXISTING FOLDER
 
-if($campaign){
-  if($campaign[company]){
+//OLD ROUTER
+if($current){
+  if($current[company]){
     //IF CAMPAIGN
-    if($campaign[client]){
-      if($campaign[name] || $campaign[date]){
+    if($current[client]){
+      if($current[name] || $current[date]){
         //IF FOLDER EXISTS : LOAD CAMPAIGN OR SHOW PREVIEW
         if(!empty($_GET[preview])){
           include('templates/folder-preview.php');

@@ -17,31 +17,6 @@ function getCampaignDataFromSlug($campaign_slug){
   return $campaign;
 }
 
-//GET Contents of current company and client
-function getCampaigns($campaign){
-  $folder = 'CAMPANHAS/'.$campaign[company].'/'.$campaign[client];
-  $folder = getFolderContents($folder);
-
-  foreach ($folder as $key => $value) {
-    $folder[$key] = getCampaignDataFromSlug($value);
-  }
-
-  return array_reverse($folder);
-}
-
-//GET Campaigns from client
-function getCampaignsFromClient($campaign, $client){
-  if(!$client){$client = $campaign[client];};
-  $folder = 'CAMPANHAS/'.$campaign[company].'/'.$client;
-  $folder = getFolderContents($folder);
-
-  foreach ($folder as $key => $value) {
-    $folder[$key] = getCampaignDataFromSlug($value);
-  }
-
-  return array_reverse($folder);
-}
-
 //GET Campaigns for navbar
 function getCampaignsNav($campaign){
   $folder = 'CAMPANHAS/'.$campaign[company].'/'.$campaign[client];
@@ -54,33 +29,6 @@ function getCampaignsNav($campaign){
   return array_slice(array_reverse($folder), 0, 10);
 }
 
-//GET Contents of clients folder
-function getClients($campaign){
-  $folder = 'CAMPANHAS/'.$campaign[company];
-  $folder = getFolderContents($folder);
-  return $folder;
-}
-
-//LIST Folder files
-function listFolderFiles($dir){
-    $ffs = scandir($dir);
-
-    unset($ffs[array_search('.', $ffs, true)]);
-    unset($ffs[array_search('..', $ffs, true)]);
-
-    // prevent empty ordered elements
-    if (count($ffs) < 1)
-        return;
-
-    //echo '<ol>';
-    foreach($ffs as $ff){
-        //echo '<li>'.$ff;
-        //if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff);
-        //echo '</li>';
-    }
-    echo '</ol>';
-}
-
 //GET Type of extension
 function detectType($name){
   $ext= pathinfo($name, PATHINFO_EXTENSION);
@@ -90,10 +38,10 @@ function detectType($name){
   return $ext;
 }
 
-//GET Contents of current campaign
+//TODO: NEW VERSION: GET Contents of current campaign
 function getCampaign(){
-  global $campaign;
-  $folder = 'CAMPANHAS/'.$campaign[company].'/'.$campaign[client].'/'.$campaign[folder];
+  global $current;
+  $folder = 'CAMPANHAS/'.$current[company].'/'.$current[client].'/'.$current[folder];
 
   //$ffs = scandir($folder);
   $fffs = glob($folder . '/*');
@@ -117,34 +65,177 @@ function getCampaign(){
   return $ffs;
 }
 
-//GET Stats
-/*function getCampaignStats($company){
-  $campaignstats = 1;
-  $campaigns = count( glob('CAMPANHAS/'.$company.'/*' , GLOB_ONLYDIR);
-  foreach ($campaigns as $key => $campaign) {
-    $campaignstats .= count($value);
-  }
-  return $campaignstats;
-}*/
+// NEW FUNCTIONS ====================
 
-//GET Companies
-function getCompanies($company){
-  $folder = 'CAMPANHAS';
-  $folder = getFolderContents($folder);
-  foreach ($folder as $companyKey => $company) {
-    $companies[$companyKey][name] = $company;
-    $companies[$companyKey][clients] = glob('CAMPANHAS/'.$company.'/*' , GLOB_ONLYDIR);
-    /*$companies[$companyKey][campaings] .= getCampaignStats($company);*/
+//GET ALL
+function getAll(){
+  global $baseFolder;
+
+  $folders = glob($baseFolder.'/*', GLOB_ONLYDIR);
+  //Count companies
+  $all[company_count] = count($folders);
+
+  foreach ($folders as $companyKey => $company) {
+    $all[companies][$companyKey][name] = str_replace($baseFolder.'/','',$company);
+    $all[companies][$companyKey][link] = str_replace($baseFolder.'/','/',$company);
+    $all[companies][$companyKey][folder_path] = $company;
+
+    //CLIENTS
+    $clients = glob($company.'/*' , GLOB_ONLYDIR);
+    if($clients){
+      $client_count = 0;
+      $campaign_count = 0;
+
+      foreach ($clients as $clientKey => $client) {
+        $all[companies][$companyKey][clients][$clientKey][name] = str_replace($company.'/','',$client);
+        $all[companies][$companyKey][clients][$clientKey][link] = str_replace($baseFolder.'/','/',$client);
+        $all[companies][$companyKey][clients][$clientKey][folder_path] = $client;
+
+        //Count clients (w/out Showreel and Interno)
+        if(str_replace($company.'/','',$client) === "Showreel" || str_replace($company.'/','',$client) === "Interno"){
+          //Don't Count
+        }else{
+          $client_count++;
+        }
+
+        //CAMPAIGNS
+        $campaigns = glob($client.'/*' , GLOB_ONLYDIR);
+        if($campaigns){
+          //Count campaigns
+          $all[companies][$companyKey][clients][$clientKey][campaign_count] = count($campaigns);
+
+          foreach ($campaigns as $campaignKey => $campaign) {
+            //Get date from folder name
+            $folderName = explode(' ',str_replace($client.'/','',$campaign));
+            $campaignDate = date('d/m/Y',strtotime($folderName[0]));
+
+            //Folder to name/date definition
+            if(!empty($campaignDate)){
+              $all[companies][$companyKey][clients][$clientKey][campaigns][$campaignKey][name] = str_replace($folderName[0].' ','', str_replace($client.'/','',$campaign) );
+              $all[companies][$companyKey][clients][$clientKey][campaigns][$campaignKey][date] = $campaignDate;
+            }else{
+              $all[companies][$companyKey][clients][$clientKey][campaigns][$campaignKey][name] = str_replace($client.'/','',$campaign);
+            }
+            //Path and Folder Name
+            $all[companies][$companyKey][clients][$clientKey][campaigns][$campaignKey][link] = str_replace($client.'/','/',$campaign);
+            $all[companies][$companyKey][clients][$clientKey][campaigns][$campaignKey][folder_path] = $campaign;
+            $all[companies][$companyKey][clients][$clientKey][campaigns][$campaignKey][folder_name] = str_replace($client.'/','',$campaign);
+
+            //Count Campaigns
+            if(str_replace($company.'/','',$client) === "Showreel" || str_replace($company.'/','',$client) === "Interno"){
+              //Don't Count
+            }else{
+              $campaign_count++;
+            }
+          }
+        }
+        //END CAMPAIGNS
+
+        //Count clients definition (w/out Showreel and Interno)
+        $all[companies][$companyKey][client_count] = $client_count;
+        $all[companies][$companyKey][campaign_count] = $campaign_count;
+      }
+    }
+    //END CLIENTS
   }
+  //END COMPANIES
+  //debug($all);
+  return $all;
+}
+
+//GET COMPANIES ONLY
+function getCompanies(){
+  global $baseFolder;
+  $companyFolders = glob($baseFolder.'/*', GLOB_ONLYDIR);
+
+  foreach ($companyFolders as $companyKey => $company) {
+    $companies[$companyKey][name] = str_replace($baseFolder.'/','',$company);
+    $companies[$companyKey][link] = str_replace($baseFolder.'/','/',$company);
+    $companies[$companyKey][folder_path] = $company;
+  }
+  //debug($companies,'getCompanies');
   return $companies;
 }
 
-//DEBUG
-function debug($what){
-  global $testmode;
-  if($testmode === true){
-    echo '<pre class="bg-dark text-light mb-0"><span class="bg-primary text-light text-left d-inline-block"> DEBUG AREA </span><span class="bg-danger text-light text-right d-inline-block"> TEST MODE ENABLED! </span><br>';
-    print_r($what);
-    echo '</pre>';
+//GET COMPANIES ONLY
+function getCompanyClients($company = false){
+  global $current, $baseFolder;
+  if(!$company){
+    $company = $current[company];
   }
+  $companyPath = $baseFolder.'/'.$company;
+
+  $clientFolders = glob($companyPath.'/*', GLOB_ONLYDIR);
+
+  if($clientFolders){
+    foreach ($clientFolders as $clientKey => $client) {
+      $clients[$clientKey][name] = str_replace($companyPath.'/','',$client);
+      $clients[$clientKey][link] = str_replace($baseFolder.'/','/',$client);
+      $clients[$clientKey][campaign_count] = count(getClientCampaigns($company,str_replace($companyPath.'/','',$client)));
+    }
+
+    //debug($clients,'getCompanyClients');
+    return $clients;
+  }
+  return false;
 }
+
+//GET CAMPAIGNS ONLY
+function getClientCampaigns($company = false, $client = false){
+  global $current, $baseFolder;
+  if(!$client){
+    $company = $current[company];
+    $client = $current[client];
+  }
+
+  $clientPath = $baseFolder.'/'.$company.'/'.$client;
+
+  $campaignFolders = glob($clientPath.'/*', GLOB_ONLYDIR);
+
+  if($campaignFolders){
+
+    foreach ($campaignFolders as $campaignKey => $campaign) {
+      //Get date from folder name
+      $folderName = explode(' ',str_replace($clientPath.'/','',$campaign));
+      $campaignDate = date('d/m/Y',strtotime($folderName[0]));
+
+      //Folder to name/date definition
+      if(!empty($campaignDate)){
+        $campaigns[$campaignKey][name] = str_replace($folderName[0].' ','', str_replace($clientPath.'/','',$campaign) );
+        $campaigns[$campaignKey][date] = $campaignDate;
+      }else{
+        $campaigns[$campaignKey][name] = str_replace($clientPath.'/','',$campaign);
+      }
+      //Path and Folder Name
+      $campaigns[$campaignKey][link] = str_replace($baseFolder.'/','/',$campaign);
+      $campaigns[$campaignKey][folder_path] = $campaign;
+      $campaigns[$campaignKey][folder_name] = str_replace($clientPath.'/','',$campaign);
+    }
+
+    //debug($campaigns,'getClientCampaigns');
+    return array_reverse($campaigns);
+  }
+  return false;
+}
+
+//TODO GET NAVIGATION
+//TODO CHECK IF FOLDER EXISTS FOR CURRENT PATH
+
+//DEBUG
+function debug($what, $the = ""){
+  global $testmode;
+  if($testmode === true): ?>
+  <section class="debug mb-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-8 col-lg-5 bg-info text-light text-left"><small>DEBUG:</small> <?php echo $the; ?></div>
+        <div class="col-4 offset-lg-5 col-lg-2 bg-secondary text-light text-right"><small>TEST MODE ENABLED!</small></div>
+      </div>
+      <div class="row">
+        <pre class="col bg-dark text-light pt-1 pb-1 mb-0"><?php print_r($what); ?></pre>
+      </div>
+    </div>
+  </section>
+  <?php endif;
+}
+?>
