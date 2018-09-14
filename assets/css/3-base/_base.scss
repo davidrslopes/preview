@@ -14,14 +14,17 @@ main.content-wrap{
 .display-4{
   font-size: 2rem;
 }
+.fas{
+  font-size: 1.5rem;
+}
 .fa-stack{
-  .fa-stack-1x{
+  .fas.fa-stack-1x{
     font-size: .6rem;
     margin-left: .5rem;
     margin-top: .4rem;
     color: $secondary;
   }
-  .fa-stack-2x{
+  .fas.fa-stack-2x{
     font-size: 1.5rem;
   }
 }

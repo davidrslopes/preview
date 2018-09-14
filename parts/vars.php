@@ -6,7 +6,7 @@ $baseFolder = "CAMPANHAS";
 $testmode = true;
 
 //GET DATA FROM URL
-$url = trim( $_SERVER['REQUEST_URI'], '/' );
+$url = trim( $_SERVER[REQUEST_URI], '/' );
 $url = explode('/',$url);
 $path = $_GET[path];
 
@@ -19,7 +19,7 @@ $colors[FUSE] = '#BE0620';
 if($url){
   //IF COMPANY (This sets theme and folder orig)
   $current[company] = urldecode ($url[0]);
-  $current[company_color] = $colors[strtoupper ($current['company'])];
+  $current[company_color] = $colors[strtoupper ($current[company])];
 
   //IF CLIENT
   if($url[1]){

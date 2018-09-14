@@ -1,24 +1,24 @@
 <?php $current_folders = getCampaignsNav($current); ?>
 <!-- NAVIGATION ######################################## -->
-<nav class="omnicp-navbar navbar navbar-expand-lg navbar-dark bg-primary fixed-top navbar-<?php echo strtolower ($current['company']);?>">
+<nav class="omnicp-navbar navbar navbar-expand-lg navbar-dark bg-primary fixed-top navbar-<?php echo strtolower ($current[company]);?>">
   <div class="container">
-    <a class="navbar-brand" href="/<?php echo $current['company']; ?>">
+    <a class="navbar-brand" href="/<?php echo $current[company]; ?>">
       <div class="svg-brand">
         <?php
-          if(!$current['company']){
+          if(!$current[company]){
             include('assets/img/OMG.SVG');
           }else{
-            include('assets/img/'.strtoupper ($current['company']).'.SVG');
+            include('assets/img/'.strtoupper ($current[company]).'.SVG');
           }
           ?>
       </div>
-      <?php if(!$current['company']): ?><div class="navbar-text d-none d-lg-none"> [Preview Projectos] <small>α</small></div><?php endif; ?>
+      <?php if(!$current[company]): ?><div class="navbar-text d-none d-lg-none"> [Preview Projectos] <small>α</small></div><?php endif; ?>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#<?php echo strtolower ($current['company']);?>-navbar-collapse" aria-controls="<?php echo $current['company'];?>-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#<?php echo strtolower ($current[company]);?>-navbar-collapse" aria-controls="<?php echo $current[company];?>-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"><i class="fa fa-navicon"></i></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="<?php echo strtolower ($current['company']);?>-navbar-collapse">
+    <div class="collapse navbar-collapse" id="<?php echo strtolower ($current[company]);?>-navbar-collapse">
       <?php if($current[company]): ?>
       <ul class="navbar-nav ml-auto">
         <li>

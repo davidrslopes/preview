@@ -19,50 +19,83 @@ function getCampaignDataFromSlug($campaign_slug){
 
 //GET Campaigns for navbar
 function getCampaignsNav($campaign){
-  $folder = 'CAMPANHAS/'.$campaign[company].'/'.$campaign[client];
-  $folder = getFolderContents($folder);
+  $folderPath = 'CAMPANHAS/'.$campaign[company].'/'.$campaign[client];
+  $folder = glob($folderPath . '/*');
 
   foreach ($folder as $key => $value) {
-    $folder[$key] = getCampaignDataFromSlug($value);
+    //$folder[$key] = $value;
+    $folderName = explode(' ',str_replace($folderPath.'/','',$value));
+    //$folderDate = date('d/m/Y',strtotime($folderName[0]));
+
+    $navigation[$key][name] = str_replace($folderName[0].' ','', str_replace($folderPath.'/','',$value) );
+    $navigation[$key][date] = date('d/m/Y',strtotime($folderName[0]));
   }
 
-  return array_slice(array_reverse($folder), 0, 10);
+  return array_slice(array_reverse($navigation), 0, 10);
 }
 
 //GET Type of extension
-function detectType($name){
+function getFileType($name){
   $ext= pathinfo($name, PATHINFO_EXTENSION);
   if(!$ext){
     $ext = "folder";
   }
   return $ext;
 }
+//GET File name w/out extention
+function getFileName($file){
+  if (defined('PATHINFO_FILENAME')) return pathinfo($file,PATHINFO_FILENAME);
+  if (strstr($file, '.')) return substr($file,0,strrpos($file,'.'));
+}
 
 //TODO: NEW VERSION: GET Contents of current campaign
 function getCampaign(){
   global $current;
-  $folder = 'CAMPANHAS/'.$current[company].'/'.$current[client].'/'.$current[folder];
+  global $baseFolder;
 
-  //$ffs = scandir($folder);
-  $fffs = glob($folder . '/*');
-  foreach ($fffs as $ffkey => $ff) {
-    $ffs[$ffkey][name] = substr(str_replace($folder,'',$ff),1);
-    $ffs[$ffkey][link] = $ff;
-    //SUBFOLDERS AND FILES
-    $ffsubs = glob($ff . '/*');
-    foreach ($ffsubs as $ffsubkey => $ffsub) {
-      $ffs[$ffkey][subfolders][$ffsubkey][name] = substr(str_replace($ff,'',$ffsub),1);
-      $ffs[$ffkey][subfolders][$ffsubkey][link] = '/'.$ffsub;
-      $ffs[$ffkey][subfolders][$ffsubkey][type] = detectType(substr(str_replace($ff,'',$ffsub),1));
+  $campaignFolder = $baseFolder.'/'.$current[company].'/'.$current[client].'/'.$current[folder];
+
+  $items = glob($campaignFolder . '/*');
+  //FOLDERS / FILES
+  foreach ($items as $itemKey => $item) {
+    $type = getFileType(str_replace($campaignFolder.'/','',$item));
+    if($type === 'folder'){
+      //This is a folder
+      $campaign[$itemKey][name] = str_replace($campaignFolder.'/','',$item);
+      $campaign[$itemKey][link] = str_replace($baseFolder.'/','/',$item);
+      $campaign[$itemKey][type] = getFileType(str_replace($campaignFolder.'/','',$item));
+      $campaign[$itemKey][folderPath] = $item;
+
+      //SUBFOLDERS / FILES
+      $subItems = glob($item . '/*');
+      foreach ($subItems as $subItemsKey => $subItem) {
+        $subType = getFileType(str_replace($item.'/','',$subItem));
+        if($subType === 'folder'){
+          //This is a subfolder
+          $campaign[$itemKey][subItems][$subItemsKey][name] = str_replace($item.'/','',$subItem);
+          $campaign[$itemKey][subItems][$subItemsKey][link] = str_replace($baseFolder.'/','/',$subItem);
+          $campaign[$itemKey][subItems][$subItemsKey][type] = getFileType(str_replace($item.'/','',$subItem));
+          $campaign[$itemKey][subItems][$subItemsKey][folderPath] = $subItem;
+        }else{
+          //This is a subfile not a subfolder
+          $campaign[$itemKey][subItems][$subItemsKey][name] = getFileName(str_replace($item.'/','',$subItem));
+          $campaign[$itemKey][subItems][$subItemsKey][src] = '/'.$subItem;
+          $campaign[$itemKey][subItems][$subItemsKey][type] = getFileType(str_replace($item.'/','',$subItem));
+        }
+      }
+    }else{
+      //This is a file not a folder
+      $campaign[$itemKey][name] = getFileName(str_replace($campaignFolder.'/','',$item));
+      $campaign[$itemKey][src] = '/'.$item;
+      $campaign[$itemKey][type] = getFileType(str_replace($campaignFolder.'/','',$item));
     }
-
   }
 
   // prevent empty ordered elements
-  if (count($ffs) < 1)
-      return;
+  if (count($campaign) < 1){return;}
 
-  return $ffs;
+  debug($campaign,'getCampaign()');
+  return $campaign;
 }
 
 // NEW FUNCTIONS ====================
@@ -83,8 +116,8 @@ function getAll(){
     //CLIENTS
     $clients = glob($company.'/*' , GLOB_ONLYDIR);
     if($clients){
-      $client_count = 0;
-      $campaign_count = 0;
+      $clientCount = 0;
+      $campaignCount = 0;
 
       foreach ($clients as $clientKey => $client) {
         $all[companies][$companyKey][clients][$clientKey][name] = str_replace($company.'/','',$client);
@@ -95,7 +128,7 @@ function getAll(){
         if(str_replace($company.'/','',$client) === "Showreel" || str_replace($company.'/','',$client) === "Interno"){
           //Don't Count
         }else{
-          $client_count++;
+          $clientCount++;
         }
 
         //CAMPAIGNS
@@ -125,15 +158,15 @@ function getAll(){
             if(str_replace($company.'/','',$client) === "Showreel" || str_replace($company.'/','',$client) === "Interno"){
               //Don't Count
             }else{
-              $campaign_count++;
+              $campaignCount++;
             }
           }
         }
         //END CAMPAIGNS
 
         //Count clients definition (w/out Showreel and Interno)
-        $all[companies][$companyKey][client_count] = $client_count;
-        $all[companies][$companyKey][campaign_count] = $campaign_count;
+        $all[companies][$companyKey][client_count] = $clientCount;
+        $all[companies][$companyKey][campaign_count] = $campaignCount;
       }
     }
     //END CLIENTS

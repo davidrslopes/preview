@@ -9308,13 +9308,16 @@ main.content-wrap {
 .display-4 {
   font-size: 2rem; }
 
-.fa-stack .fa-stack-1x {
+.fas {
+  font-size: 1.54rem; }
+
+.fa-stack .fas.fa-stack-1x {
   font-size: .6rem;
   margin-left: .5rem;
   margin-top: .4rem;
   color: #6c757d; }
 
-.fa-stack .fa-stack-2x {
+.fa-stack .fas.fa-stack-2x {
   font-size: 1.5rem; }
 
 .preview-link:hover, .preview-link:focus {
