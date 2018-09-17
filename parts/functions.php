@@ -86,8 +86,6 @@ function getCampaign(){
   return $campaign;
 }
 
-// NEW FUNCTIONS ====================
-
 //GET ALL
 function getAll(){
   global $baseFolder;
@@ -241,6 +239,83 @@ function getClientCampaigns($company = false, $client = false){
 
 //TODO GET NAVIGATION
 //TODO CHECK IF FOLDER EXISTS FOR CURRENT PATH
+
+// TEMPLATING ====================
+//Folder
+function folderTemplate($folder){
+  if(array_key_exists('subItems', $folder)){
+    return '
+    <h5 class="list-group-item">
+      <div class="d-flex justify-content-between">
+        '.$folder[name].'
+        <i class="fas fa-folder-open text-primary"></i>
+      </div>
+    </h5>
+    ';
+  }else{
+    return '
+    <a class="list-group-item list-group-item-action align-items-center" href="'.$folder[link].'" target="_blank">
+      <div class="d-flex justify-content-between">
+        '.$folder[name].'
+        <span class="fa-stack">
+          <i class="fas fa-folder fa-stack-2x text-primary"></i>
+          <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
+        </span>
+      </div>
+    </a>
+    ';
+  }
+}
+//Image
+function fileImageTemplate($image){
+  return '
+  <a class="list-group-item list-group-item-action align-items-center" href="'.$image[src].'" target="_blank">
+    <div class="list-group-item-img"><img class="img-fluid" src="'.$image[src].'" title="'.$image[name].'"></div>
+    <div class="d-flex justify-content-between">
+      '.$image[name].'
+      <span class="fa-stack" title="Download '.$image[type].'">
+        <i class="fas fa-file-image fa-stack-2x text-primary"></i>
+        <i class="fas fa-download fa-stack-1x fa-inverse"></i>
+      </span>
+    </div>
+  </a>
+  ';
+}
+//Archive
+function fileArchiveTemplate($archive){
+  return '
+  <a class="list-group-item list-group-item-action align-items-center" href="'.$archive[src].'">
+    <div class="d-flex justify-content-between">
+      '.$archive[name].'
+      <span class="fa-stack" title="Download '.$archive[type].'">
+        <i class="fas fa-file-archive fa-stack-2x text-primary"></i>
+        <i class="fas fa-download fa-stack-1x fa-inverse"></i>
+      </span>
+    </div>
+  </a>
+  ';
+}
+//Video
+function fileVideoTemplate($video){
+  return '
+  <div class="embed-responsive embed-responsive-16by9">
+    <video class="embed-responsive-item" controls>
+      <source src="'.$video[src].'" type="video/'.$video[type].'">
+        Your browser does not support the video tag.
+    </video>
+  </div>
+  <a class="list-group-item list-group-item-action align-items-center" href="'.$video[src].'">
+    <div class="d-flex justify-content-between">
+      '.$video[name].'
+      <span class="fa-stack" title="Download '.$video[type].'">
+        <i class="fas fa-file-video fa-stack-2x text-primary"></i>
+        <i class="fas fa-download fa-stack-1x fa-inverse"></i>
+      </span>
+    </div>
+  </a>
+  ';
+}
+
 
 //DEBUG
 function debug($what, $the = ""){

@@ -10,46 +10,42 @@ $campaignItems = getCampaign();
       <div class="col-12 col-md-6 col-lg-4 mt-4">
         <div class="list-group">
         <?php
-        if($campaignItem[type] === 'folder'){
-          include('folder.php');
-          foreach ($campaignItem[subItems] as $campaignSubItem){
-            switch ($campaignSubItem[type]) {
-              case 'zip':
-                include('file-archive.php');
-                break;
-              case 'jpg':
-              case 'png':
-              case 'gif':
-                include('file-image.php');
-                break;
-              case 'mp4':
-              case 'webm':
-                include('file-video.php');
-                break;
-              default:
-                include('folder.php');
-                break;
+        switch ($campaignItem[type]) {
+          case 'jpg':
+          case 'png':
+          case 'gif':
+            echo fileImageTemplate($campaignItem);
+            break;
+          case 'mp4':
+            echo fileVideoTemplate($campaignItem);
+            break;
+          case 'zip':
+            echo fileArchiveTemplate($campaignItem);
+            break;
+          default:
+            // folder
+            echo folderTemplate ($campaignItem);
+            foreach ($campaignItem[subItems] as $campaignSubItemKey => $campaignSubItem) {
+              switch ($campaignSubItem[type]) {
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                case 'gif':
+                  echo fileImageTemplate($campaignSubItem);
+                  break;
+                case 'mp4':
+                case 'ogv':
+                  echo fileVideoTemplate($campaignSubItem);
+                  break;
+                case 'zip':
+                  echo fileArchiveTemplate($campaignSubItem);
+                  break;
+                default:
+                  echo folderTemplate($campaignSubItem);
+                  break;
+              }
             }
-          }
-        }else{
-          switch ($campaignItem[type]) {
-            case 'zip':
-              include('file-archive.php');
-              break;
-            case 'jpg':
-            case 'png':
-            case 'gif':
-              include('file-image.php');
-              break;
-            case 'mp4':
-            case 'webm':
-              //Init Video Player
-              include('file-video.php');
-              break;
-            default:
-              include('error.php');
-              break;
-          }
+            break;
         }
         ?>
         </div><!--//List Group-->
