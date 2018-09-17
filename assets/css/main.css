@@ -9309,7 +9309,7 @@ main.content-wrap {
   font-size: 2rem; }
 
 .fas {
-  font-size: 1.54rem; }
+  font-size: 1.5rem; }
 
 .fa-stack .fas.fa-stack-1x {
   font-size: .6rem;
@@ -9378,6 +9378,12 @@ main.content-wrap {
     font-weight: 400; }
     .omnicp-jumbotron .jumbotron-date i {
       font-size: 1.33rem; }
+
+/* Campaign content -------------------- */
+.omnicp-campaign-content .list-group-item-img {
+  margin: -.8rem -1.2rem 1rem;
+  padding: 0;
+  text-align: center; }
 
 /* Footer -------------------- */
 footer .omnicp-copy,

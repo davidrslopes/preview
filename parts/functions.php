@@ -8,25 +8,13 @@ function getFolderContents($dir){
   return $folders = array_values($folders);
 }
 
-//GET Campaign data from slug
-function getCampaignDataFromSlug($campaign_slug){
-  $campaign_slug_data = explode(' ',$campaign_slug);
-  $campaign[date] = urldecode ( $campaign_slug_data[0] );
-  $campaign[name] = urldecode ( strstr($campaign_slug,' ') );
-  $campaign[folder] = urldecode ($campaign_slug);
-  return $campaign;
-}
-
 //GET Campaigns for navbar
 function getCampaignsNav($campaign){
   $folderPath = 'CAMPANHAS/'.$campaign[company].'/'.$campaign[client];
   $folder = glob($folderPath . '/*');
 
   foreach ($folder as $key => $value) {
-    //$folder[$key] = $value;
     $folderName = explode(' ',str_replace($folderPath.'/','',$value));
-    //$folderDate = date('d/m/Y',strtotime($folderName[0]));
-
     $navigation[$key][name] = str_replace($folderName[0].' ','', str_replace($folderPath.'/','',$value) );
     $navigation[$key][date] = date('d/m/Y',strtotime($folderName[0]));
   }
@@ -48,7 +36,7 @@ function getFileName($file){
   if (strstr($file, '.')) return substr($file,0,strrpos($file,'.'));
 }
 
-//TODO: NEW VERSION: GET Contents of current campaign
+//GET Contents of current campaign
 function getCampaign(){
   global $current;
   global $baseFolder;

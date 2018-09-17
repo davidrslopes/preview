@@ -3,8 +3,8 @@
   $imageItem = $campaignItem;
   if($campaignSubItem){$imageItem = $campaignSubItem;}
 ?>
-<img src="<?php echo $imageItem[src]; ?>" title="<?php echo $imageItem[name]; ?>">
-<a class="list-group-item list-group-item-action align-items-center" href="<?php echo $imageItem[src]; ?>">
+<a class="list-group-item list-group-item-action align-items-center" href="<?php echo $imageItem[src]; ?>" target="_blank">
+  <div class="list-group-item-img"><img class="img-fluid" src="<?php echo $imageItem[src]; ?>" title="<?php echo $imageItem[name]; ?>"></div>
   <div class="d-flex justify-content-between">
     <?php echo $imageItem[name]; ?>
     <span class="fa-stack" title="Download <?php echo $imageItem[type];?>">
