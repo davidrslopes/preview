@@ -9297,7 +9297,7 @@ body {
 
 main.content-wrap {
   margin-top: 5.5rem;
-  margin-bottom: 5rem; }
+  margin-bottom: 4rem; }
 
 /* Common -------------------- */
 .flex-grow {
@@ -9335,6 +9335,12 @@ main.content-wrap {
 
 .table-row {
   cursor: pointer; }
+
+.omnicp-iframe {
+  width: 100% !important;
+  min-height: 650px !important;
+  border: 0 !important;
+  overflow: hidden !important; }
 
 /* Navbar -------------------- */
 .omnicp-navbar .navbar-brand > div.svg-brand {

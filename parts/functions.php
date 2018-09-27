@@ -82,7 +82,7 @@ function getCampaign(){
   // prevent empty ordered elements
   if (count($campaign) < 1){return;}
 
-  debug($campaign,'getCampaign()');
+  //debug($campaign,'getCampaign()');
   return $campaign;
 }
 
@@ -254,7 +254,7 @@ function folderTemplate($folder){
     ';
   }else{
     return '
-    <a class="list-group-item list-group-item-action align-items-center" href="'.$folder[link].'" target="_blank">
+    <a class="list-group-item list-group-item-action align-items-center" href="?preview='.$folder[folderPath].'">
       <div class="d-flex justify-content-between">
         '.$folder[name].'
         <span class="fa-stack">
